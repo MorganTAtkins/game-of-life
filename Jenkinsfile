@@ -1,7 +1,5 @@
 // Example Pipeline: Deploy to Elastic Beanstalk
 
-@Library('jenkins-pipeline-library') _
-
 pipeline {
   agent any
   environment {
