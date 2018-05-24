@@ -6,14 +6,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                mvn install
+                /usr/bin/mvn install
 
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                mvn clean verify
+                /usr/bin/mvn clean verify
             }
         }
         stage('Deploy') {
