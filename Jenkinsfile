@@ -34,12 +34,6 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh "/usr/bin/mvn clean verify"
-                
-                mail body: 'project build successful',
-                     from: 'xxxx@yyyyy.com',
-                     replyTo: 'xxxx@yyyy.com',
-                     subject: 'project build successful',
-                     to: 'morgantatkins@gmail.com'
             }
         }
     }
