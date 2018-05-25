@@ -20,15 +20,20 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                script {
-                    try {
-                        // code
-                    } catch (e) {
-                        print e
-                        throw
-                    }
+            post {
+                always {
                     echo "RESULT: ${currentBuild.result}"
+                }
+                failure {
+                    sh 'echo failed'
+                }
+                changed {
+                    sh 'echo changed'
+                }
+            }
+            steps {
+                echo "RESULT: ${currentBuild.result}"
+                script {
                     if (${currentBuild.result} == 'Success' ) {
                         sh "curl -v -H \"Accept: application/json\" -H \"Content-Type: application/json\" -X POST --data '{\"short_description\":\"Test incident creation through REST\", \"comments\":\"These are my comments\"}' -u \"$SNOW_AUTH\" \"https://$SNOW_URL.service-now.com/api/now/v1/table/incident\""
                     }
