@@ -21,11 +21,14 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                script {
                 try {
-                    //Your code
-                    currentBuild.result = 'Success'
-                } catch (Exception err) {
-                    currentBuild.result = 'FAILURE'
+                    // code
+                    }
+                } catch (e) {
+                    print e
+                    throw
+                }
                 }
                 echo "RESULT: ${currentBuild.result}"
                 if (${currentBuild.result} == 'Success' ) {
