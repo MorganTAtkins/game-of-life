@@ -1,7 +1,10 @@
 // Example Pipeline: Deploy to Elastic Beanstalk
 pipeline {
     agent any
-
+    environment {
+        SNOW_AUTH = credentials('snow_auth')
+        SNOW_URL = ${env.SNOW_URL}
+    }
     stages {
         stage('Build') {
             steps {
@@ -17,9 +20,18 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+            stage('Last stage') {
+                try {
+                //Your code
+                currentBuild.result = 'Success'
+                } catch (Exception err) {
+                currentBuild.result = 'FAILURE'
+                }
             }
+            echo "RESULT: ${currentBuild.result}"
+        if (${currentBuild.result} == 'Success' ) {
+            sh "curl -v -H "Accept: application/json" -H "Content-Type: application/json" -X POST --data "{\"short_description\":\"Test incident creation through REST\", \"comments\":\"These are my comments\"}" -u "$SNOW_AUTH" "https://$SNOW_URL.service-now.com/api/now/v1/table/incident""
+        }
         }
     }
 }
