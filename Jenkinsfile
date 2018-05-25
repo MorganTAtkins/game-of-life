@@ -38,6 +38,11 @@ pipeline {
                         sh "curl -v -H \"Accept: application/json\" -H \"Content-Type: application/json\" -X POST --data '{\"short_description\":\"Test incident creation through REST\", \"comments\":\"These are my comments\"}' -u \"$SNOW_AUTH\" \"https://$SNOW_URL.service-now.com/api/now/v1/table/incident\""
                     }
                 }
+                mail body: 'project build successful',
+                     from: 'xxxx@yyyyy.com',
+                     replyTo: 'xxxx@yyyy.com',
+                     subject: 'project build successful',
+                     to: 'morgantatkins@gmail.com'
             }
         }
     }
