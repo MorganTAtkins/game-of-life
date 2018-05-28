@@ -36,8 +36,6 @@ pipeline {
                 withSonarQubeEnv('My SonarQube Server') {
                     sh "/usr/bin/mvn clean verify sonar:sonar"
                 }
-            }
-            steps {
                 timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
                 }
@@ -66,8 +64,6 @@ pipeline {
                 withSonarQubeEnv('My SonarQube Server') {
                     sh "/usr/bin/mvn clean package sonar:sonar"
                 }
-            }
-            steps {
                 timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
                 }
