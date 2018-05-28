@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh "/usr/bin/mvn install"
+                sh "/usr/bin/mvn clean install sonar:sonar -Dsonar.host.url=http://sonar:9000"
             }
         }
         stage('Test Verify') {
@@ -29,12 +29,7 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
-                withSonarQubeEnv('My SonarQube Server') {
-                    sh "/usr/bin/mvn clean verify sonar:sonar -Dsonar.host.url=http://sonar:9000"
-                }
-                timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: false
-                }
+                sh "/usr/bin/mvn clean package sonar:sonar -Dsonar.host.url=http://sonar:9000"
             }
         }
     }
