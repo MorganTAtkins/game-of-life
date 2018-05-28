@@ -29,7 +29,7 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
-                sh "/usr/bin/mvn clean package sonar:sonar -Dsonar.host.url=http://sonar:9000"
+                sh "/usr/bin/mvn clean verify sonar:sonar -Dsonar.host.url=http://sonar:9000"
             }
         }
     }
