@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh "/usr/bin/mvn clean install sonar:sonar -Dsonar.host.url=http://sonar:9000"
+                sh "/usr/bin/mvn sonar:sonar -Dsonar.host.url=http://sonar:9000"
             }
         }
         stage('Test Verify') {
