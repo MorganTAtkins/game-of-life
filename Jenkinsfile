@@ -10,7 +10,6 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh "/usr/bin/mvn install"
-
             }
         }
         stage('Test Verify') {
@@ -34,35 +33,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 withSonarQubeEnv('My SonarQube Server') {
-                    sh "/usr/bin/mvn clean verify sonar:sonar"
-                }
-                timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-        stage('Test Package') {
-            post {
-                always {
-                    echo "Running Tests..."
-                }
-                failure {
-                    echo "RESULT: failed"
-                }
-                fixed {
-                    sh "curl -v -H \"Accept: application/json\" -H \"Content-Type: application/json\" -X POST --data '{\"short_description\":\"Test incident creation through REST\", \"comments\":\"These are my comments - fixed\"}' -u \"$SNOW_AUTH\" \"https://${SNOW_URL}.service-now.com/api/now/v1/table/incident\""
-                }
-                regression {
-                    sh "curl -v -H \"Accept: application/json\" -H \"Content-Type: application/json\" -X POST --data '{\"short_description\":\"Test incident creation through REST\", \"comments\":\"These are my comments - regression\"}' -u \"$SNOW_AUTH\" \"https://${SNOW_URL}.service-now.com/api/now/v1/table/incident\""
-                }
-                success {
-                    sh "curl -v -H \"Accept: application/json\" -H \"Content-Type: application/json\" -X POST --data '{\"short_description\":\"Test incident creation through REST\", \"comments\":\"These are my comments - success\"}' -u \"$SNOW_AUTH\" \"https://${SNOW_URL}.service-now.com/api/now/v1/table/incident\""
-                }
-            }
-            steps {
-                echo 'Testing..'
-                withSonarQubeEnv('My SonarQube Server') {
-                    sh "/usr/bin/mvn clean package sonar:sonar"
+                    sh "mvn clean verify sonar:sonar-verify"
                 }
                 timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
