@@ -14,9 +14,6 @@ pipeline {
         }
         stage('Test Verify') {
             post {
-                always {
-                    echo "Running Tests..."
-                }
                 failure {
                     echo "RESULT: failed"
                 }
@@ -36,7 +33,7 @@ pipeline {
                     sh "/usr/bin/mvn clean verify sonar:sonar -Dsonar.host.url=http://sonar:9000"
                 }
                 timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
+                waitForQualityGate abortPipeline: false
                 }
             }
         }
