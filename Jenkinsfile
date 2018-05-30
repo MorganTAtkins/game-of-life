@@ -6,12 +6,6 @@ pipeline {
         SNOW_URL = "${env.SNOW_URL}"
     }
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-                sh "/usr/bin/mvn -e -X clean install sonar:sonar -Dskip-tests -Dsonar.host.url=http://jenkins.agile.env.ecs.digital:9000"
-            }
-        }
         stage('Test Verify') {
             post {
                 failure {
