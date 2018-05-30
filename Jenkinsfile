@@ -9,7 +9,7 @@ pipeline {
         stage('Sonar') {
             steps {
                 echo 'Building..'
-                sh "mvn sonar:sonar -Dsonar.host.url=http://jenkins.agile.env.ecs.digital:9000 -Dsonar.login=3c85db66d3e4f7b0e616849e86c662c0396ad3ad"
+                sh "mvn sonar:sonar -Dsonar.host.url=http://jenkins.agile.env.ecs.digital:9000"
             }
         }
         stage('Test Verify') {
