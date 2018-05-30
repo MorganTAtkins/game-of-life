@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh "/usr/bin/mvn -e -X clean install sonar:sonar -Dskip-tests -Dsonar.host.url=http://localhost:9000"
+                sh "/usr/bin/mvn -e -X clean install sonar:sonar -Dskip-tests -Dsonar.host.url=http://jenkins.agile.env.ecs.digital:9000"
             }
         }
         stage('Test Verify') {
@@ -29,7 +29,7 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
-                sh "/usr/bin/mvn clean verify sonar:sonar -Dsonar.host.url=http://localhost:9000"
+                sh "/usr/bin/mvn clean verify sonar:sonar -Dsonar.host.url=http://jenkins.agile.env.ecs.digital:9000"
             }
         }
     }
