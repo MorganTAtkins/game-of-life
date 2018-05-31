@@ -6,12 +6,7 @@ pipeline {
         SNOW_URL = "${env.SNOW_URL}"
     }
     stages {
-        stage('Sonar') {
-            steps {
-                echo 'Building..'
-                sh "mvn sonar:sonar -Dsonar.host.url=http://sonar:9000"
-            }
-        }
+        
         stage('Test Verify') {
             post {
                 failure {
