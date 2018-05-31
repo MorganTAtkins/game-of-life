@@ -17,13 +17,13 @@ pipeline {
         SNOW_URL = "${env.SNOW_URL}"
     }
     stages {
-        stage('Pre Checks") {
+        stage('Pre Checks') {
             steps {
                 echo 'Pre Check...'
                 echo 'Pre Check...COMPLETED'
                }
             }
-         stage('Build") {
+         stage('Build') {
             steps {
                 sh "/usr/bin/mvn clean install -Dskiptest"
                 echo 'Build...COMPLETED'
