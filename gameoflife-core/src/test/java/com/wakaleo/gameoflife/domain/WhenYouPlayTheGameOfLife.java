@@ -15,7 +15,7 @@ public class WhenYouPlayTheGameOfLife {
 
     @Test
     public void aDeadCellWithNoNeighboursShouldRemainDeadInTheNextGeneration() {
-        String initialGrid = "..." + NEW_LINE +
+        String initialGrid = "" + NEW_LINE +
                 "..." + NEW_LINE +
                 "...";
 
