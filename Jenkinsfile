@@ -1,5 +1,17 @@
 // Example Pipeline: Deploy to Elastic Beanstalk
 pipeline {
+    triggers {
+    GenericTrigger(
+     genericVariables: [
+      [key: 'ref', value: '$.ref']
+     ],
+     causeString: 'Triggered on $ref',
+     regexpFilterExpression: '',
+     regexpFilterText: '',
+     printContributedVariables: true,
+     printPostContent: true
+    )
+  }
     agent any
     environment {
         SNOW_AUTH = credentials('snow_auth')
