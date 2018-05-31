@@ -1,4 +1,3 @@
-// Example Pipeline: Deploy to Elastic Beanstalk
 pipeline {
     triggers {
     GenericTrigger(
